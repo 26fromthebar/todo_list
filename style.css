@@ -1,3 +1,184 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+::placeholder {
+  color: inherit;
+  opacity: 0.7;
+}
+
 body {
-  background-color: red;
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  font-size: 2.1rem;
+  font-weight: 400;
+  color: aliceblue;
+  line-height: 1.6;
+  letter-spacing: 1px;
+
+  background-image: linear-gradient(
+    45deg,
+    hsl(360, 72%, 65%),
+    hsl(235, 62%, 73%)
+  );
+  block-size: cover;
+  background-repeat: no-repeat;
+}
+
+h1 {
+  font-size: 4.8rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+  font-weight: 400;
+  font-style: italic;
+
+  margin-bottom: 0.75em;
+}
+
+ul {
+  list-style: none;
+}
+
+.main,
+.header {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.header {
+  padding-block: 5rem;
+}
+
+.todo-input,
+.todo-btn {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+
+  border-radius: 2px;
+
+  background-color: aliceblue;
+  outline: none;
+}
+
+.todo-form {
+  width: clamp(25rem, 50%, 50rem);
+  display: flex;
+  justify-content: center;
+}
+
+.todo-input {
+  flex: 1;
+  padding: 0.5em;
+
+  background-color: transparent;
+  border: 1px solid aliceblue;
+}
+
+.todo-btn {
+  padding: 0.5em 1em;
+  color: inherit;
+  background-color: hsl(120, 80%, 30%);
+  border: none;
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+}
+
+.todo-btn:hover {
+  background-color: hsl(120, 70%, 50%);
+}
+
+.todo-btn span {
+  font-weight: 700;
+}
+
+.todo-container {
+  width: clamp(25rem, 50%, 50rem);
+  padding-block: 4em;
+}
+.todo-list {
+}
+
+.todo-item:not(:last-child) {
+  margin-bottom: 1em;
+}
+
+.todo-item-content {
+  display: flex;
+
+  width: 100%;
+  border: 1px solid aliceblue;
+  border-radius: 2px;
+}
+
+.todo-item-text {
+  flex: 1;
+
+  margin: 0.5em;
+  font-weight: 700;
+
+  transition: all 0.35s ease;
+}
+
+.options-btn {
+  padding: 0.5em 1em;
+
+  font-size: inherit;
+  font-weight: 700;
+  color: inherit;
+
+  border: none;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.completed-btn {
+  background-color: hsl(120, 5%, 50%);
+}
+
+.completed-btn:hover,
+.completed-marked {
+  background-color: hsl(120, 70%, 50%);
+}
+
+.ongoing-btn {
+  background-color: hsl(30, 5%, 50%);
+}
+
+.ongoing {
+  background-color: hsl(30, 100%, 50%);
+}
+
+.delete-btn {
+  background-color: hsl(0, 5%, 50%);
+}
+
+.delete-btn:hover {
+  background-color: hsl(0, 70%, 50%);
+}
+
+.completed-text {
+  text-decoration: line-through;
+  text-decoration-color: #777;
+  text-decoration-thickness: 0.1rem;
+
+  opacity: 0.25;
+}
+
+.delete {
+  /* transform: rotateX(50deg); */
 }
