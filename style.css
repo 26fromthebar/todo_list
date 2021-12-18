@@ -62,19 +62,19 @@ ul {
 }
 
 .todo-input,
-.todo-btn {
+.todo-btn,
+.todo-select {
   font-family: inherit;
   font-size: inherit;
   color: inherit;
 
   border-radius: 2px;
 
-  background-color: aliceblue;
   outline: none;
 }
 
 .todo-form {
-  width: clamp(25rem, 50%, 50rem);
+  width: clamp(25rem, 60%, 70rem);
   display: flex;
   justify-content: center;
 }
@@ -85,9 +85,16 @@ ul {
 
   background-color: transparent;
   border: 1px solid aliceblue;
+
+  transition: all 0.25s ease;
+}
+
+.todo-input:focus {
+  outline: 2px solid aliceblue;
 }
 
 .todo-btn {
+  margin-left: 0.25em;
   padding: 0.5em 1em;
   color: inherit;
   background-color: hsl(120, 80%, 30%);
@@ -97,7 +104,8 @@ ul {
   transition: all 0.25s ease;
 }
 
-.todo-btn:hover {
+.todo-btn:hover,
+.todo-btn:focus {
   background-color: hsl(120, 70%, 50%);
 }
 
@@ -105,11 +113,34 @@ ul {
   font-weight: 700;
 }
 
+.todo-select {
+  /* appearance: none; */
+  margin-left: 0.75em;
+  padding: 0.5em;
+  border: 1px solid aliceblue;
+
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.todo-select:focus {
+  /* outline: 2px solid aliceblue; */
+}
+
+option {
+  background-color: transparent;
+  color: #777;
+}
+
 .todo-container {
   width: clamp(25rem, 50%, 50rem);
   padding-block: 4em;
 }
 .todo-list {
+}
+
+.todo-item {
+  transition: all 0.25s ease;
 }
 
 .todo-item:not(:last-child) {
@@ -129,6 +160,7 @@ ul {
 
   margin: 0.5em;
   font-weight: 700;
+  word-break: break-all;
 
   transition: all 0.35s ease;
 }
@@ -142,12 +174,12 @@ ul {
 
   border: none;
 
-  cursor: pointer;
   transition: all 0.25s ease;
 }
 
 .completed-btn {
   background-color: hsl(120, 5%, 50%);
+  cursor: pointer;
 }
 
 .completed-btn:hover,
@@ -165,6 +197,7 @@ ul {
 
 .delete-btn {
   background-color: hsl(0, 5%, 50%);
+  cursor: pointer;
 }
 
 .delete-btn:hover {
@@ -176,9 +209,23 @@ ul {
   text-decoration-color: #777;
   text-decoration-thickness: 0.1rem;
 
-  opacity: 0.25;
+  opacity: 0.5;
 }
 
-.delete {
-  /* transform: rotateX(50deg); */
+.remove {
+  transform: translateX(50%);
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.status-completed {
+  opacity: 0.5;
+}
+
+.appear {
+  display: flex;
+}
+
+.hide {
+  display: none;
 }
