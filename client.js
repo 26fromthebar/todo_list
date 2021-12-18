@@ -8,6 +8,7 @@ const select = document.querySelector('.todo-select');
 todoBtn.addEventListener('click', addItem);
 todoList.addEventListener('click', modifyTask);
 select.addEventListener('click', todoFilter);
+window.addEventListener('DOMContentLoaded', getStoredTodos);
 
 // Functions
 function addItem(e) {
@@ -25,6 +26,9 @@ function addItem(e) {
   const itemText = document.createElement('p');
   itemText.textContent = todoInput.value;
   itemText.classList.add('todo-item-text');
+
+  // Save todo to localStorage
+  saveTodoLocal(itemText.textContent);
 
   const completedBtn = document.createElement('button');
   completedBtn.innerHTML = `&check;`;
@@ -49,6 +53,7 @@ function modifyTask(e) {
 
   if (clickedItem.classList.contains('delete-btn')) {
     clickedItem.closest('li').classList.add('remove');
+    removeTodoLocal(clickedItem.closest('div').childNodes[0].textContent);
     clickedItem.closest('li').addEventListener('transitionend', () => {
       clickedItem.closest('li').remove();
     });
@@ -63,7 +68,6 @@ function modifyTask(e) {
 
 function todoFilter(e) {
   const todos = todoList.childNodes;
-  console.log(todos);
 
   todos.forEach((todo) => {
     switch (e.target.value) {
@@ -85,5 +89,60 @@ function todoFilter(e) {
         }
         break;
     }
+  });
+}
+
+function saveTodoLocal(todo) {
+  const todoItems = [];
+
+  if (localStorage.getItem('todoItems') !== null) {
+    const storedTodos = JSON.parse(localStorage.getItem('todoItems'));
+    todoItems.push(...storedTodos);
+  }
+  todoItems.push(todo);
+  localStorage.setItem('todoItems', JSON.stringify(todoItems));
+}
+
+function removeTodoLocal(todo) {
+  const todoItems = JSON.parse(localStorage.getItem('todoItems'));
+  let index = todoItems.indexOf(todo);
+  todoItems.splice(index, 1);
+  localStorage.setItem('todoItems', JSON.stringify(todoItems));
+}
+
+function getStoredTodos() {
+  const todoItems = [];
+  if (localStorage.getItem('todoItems') !== null) {
+    const storedTodos = JSON.parse(localStorage.getItem('todoItems'));
+    todoItems.push(...storedTodos);
+  }
+
+  todoItems.forEach((todoItem) => {
+    const item = document.createElement('li');
+    item.classList.add('todo-item');
+    item.classList.add('status-ongoing');
+
+    const itemDiv = document.createElement('div');
+    itemDiv.classList.add('todo-item-content');
+
+    const itemText = document.createElement('p');
+    itemText.textContent = todoItem;
+    itemText.classList.add('todo-item-text');
+
+    const completedBtn = document.createElement('button');
+    completedBtn.innerHTML = `&check;`;
+    completedBtn.classList.add('options-btn', 'completed-btn');
+
+    const ongoingBtn = document.createElement('button');
+    ongoingBtn.innerHTML = `&#9711;`;
+    ongoingBtn.classList.add('options-btn', 'ongoing-btn', 'ongoing');
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.innerHTML = `&#10005;`;
+    deleteBtn.classList.add('options-btn', 'delete-btn');
+
+    itemDiv.append(itemText, completedBtn, ongoingBtn, deleteBtn);
+    item.appendChild(itemDiv);
+    todoList.appendChild(item);
   });
 }
